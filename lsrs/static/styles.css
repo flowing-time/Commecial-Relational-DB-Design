@@ -1,0 +1,74 @@
+html, body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+
+.page-content {
+	margin-top: 25px;
+}
+
+.container-fluid {
+	display: flex; 
+	padding-left:0px;
+	padding-right:0px;
+}
+
+.sidebar {
+	width:200px;
+	background-color: #2A4353;
+	padding-top: 20px;
+	height: 100vh;
+	margin-right: 40px;
+}
+
+.row {
+	max-width: 98vw;
+}
+
+.table-responsive {
+	overflow-y:scroll;
+	height:72vh;
+}
+
+thead {
+	background-color: #2A4353;
+	color: #f9fafa;
+}
+
+.btn {
+	background-color: #2f93e2;
+	color: #f9fafa;
+}
+
+.card-title {
+	margin-bottom: 0px;
+}
+
+.nav-link {
+	color: #f9fafa;
+}
+
+.sidebar a:hover {
+	background-color: #5CA2BE;
+	color: #0e161c;
+}
+
+.ratio {
+	margin-top: 20px;
+}
+
+.table {
+	max-width: 95vw;
+}
+
+.form-control, .form-select {
+	margin-left: 5px;
+}
+
+i.material-icons {
+	font-size: 80px !important;
+	margin-right: 15px;
+	float: left;
+}

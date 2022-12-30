@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Population</title>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/styles.css">
+</head>
+<body class="noload">
+	<h1>Population Management</h1>
+	
+	<div class="page-content">
+		<form class="row g-3" action="/population" method="POST">
+		
+		<div class="form-floating col-auto">
+			<select class="form-select" name="city" id="cities">
+					{% for item in cities %}
+					<option value="{{item[0]}},{{item[1]}}">{{item[0]}},{{item[1]}}</option>
+					{% endfor %}
+			</select>
+			<label for="cities">Choose a City:</label>
+		</div>
+		<div class="col-auto" style="align-self: center;">
+			<input class="btn" type="submit" value="Choose">
+		</div>
+		</form>
+		
+		<form class="row g-2" action="/update-population" method="POST">
+			{% for item in city_info %}
+			<label for="city">City:</label>
+			<div class="col-auto">
+				<input class="form-control" id='city' name='city' type="text" value="{{item[0]}}" onchange="checkUpdatePopulation()" readonly>
+			</div>
+			<label for="state">State:</label>
+			<div class="col-auto">
+				<input class="form-control" id='state' name='state' type="text" value="{{item[1]}}" onchange="checkUpdatePopulation()" readonly>
+			</div>	
+			<label for="population">Population:</label>
+			<div class="col-auto">
+				<input class="form-control" id='population' name='population' type="number" min="0" value="{{item[2]}}" onchange="checkUpdatePopulation()">
+			</div>	
+			<br>
+			{% endfor %}
+			<div class="col-auto">
+				<input class="btn" id='updatePopulation' type="submit" value="Update" disabled/>
+			</div>
+		<script type="text/javascript">
+		function checkUpdatePopulation(){
+				document.getElementById('updatePopulation').disabled = document.getElementById("city").value === "" || document.getElementById("state").value === "" || document.getElementById("population").value === ""
+			}
+		</script>
+		</form>
+	</div>
+	<script src="../static/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+</body>
+</html>

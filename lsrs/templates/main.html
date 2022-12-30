@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LSRT main menu</title>
+	<link rel="stylesheet" href="../static/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body style="overflow: hidden;">
+    <div class="container-fluid">
+		<div class="sidebar">
+			<nav class="nav flex-column">
+				<a class="nav-link" href="/stats" target="content">Home</a>
+				<a class="nav-link" href="/report1" target="content">Report 1</a> 
+				<a class="nav-link" href="/report2" target="content">Report 2</a> 
+				<a class="nav-link" href="/report3" target="content">Report 3</a> 
+				<a class="nav-link" href="/report4" target="content">Report 4</a> 
+				<a class="nav-link" href="/report5" target="content">Report 5</a>
+				<a class="nav-link" href="/report6" target="content">Report 6</a>
+				<a class="nav-link" href="/report7" target="content">Report 7</a>
+				<a class="nav-link" href="/report8" target="content">Report 8</a>
+				<a class="nav-link" href="/report9" target="content">Report 9</a>
+				<a class="nav-link" href="/holiday" target="content">Holiday Management</a>
+				<a class="nav-link" href="/childcare" target="content">Childcare Management</a>
+				<a class="nav-link" href="/population" target="content">Population Management</a>
+			</nav>
+		</div>
+		
+		<div id="ratio" class="ratio ratio-16x9">
+		<div class="d-flex justify-content-center">
+			<div class="spinner-border" id="spinner" role="status" style="height:6rem; width:6rem; margin:auto;">
+				<span class="sr-only"></span>
+			</div>
+		</div>
+			<iframe id="frame" src="/stats" name="content"></iframe>
+		</div>
+	</div>
+	<script src="../static/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	
+	$iframe = $('#frame');
+	$loader = $('#spinner');
+	
+	$iframe.on('load', function() {
+		
+		$iframe[0].contentWindow.onbeforeunload = function () {
+			$iframe.fadeOut("fast");
+			$iframe.hide("fast");
+			$loader.show("fast");
+		};
+		
+		if($iframe[0].contentDocument.querySelector(".noload") != undefined) {
+			$iframe[0].contentWindow.onsubmit = function() {
+				$iframe[0].contentWindow.onbeforeunload = function () {
+					$iframe.stop();
+					$loader.stop();
+				};
+			};
+		};
+		
+		$iframe.fadeIn("fast");
+		$loader.hide("fast");
+	});
+	</script>
+</body>
+</html>

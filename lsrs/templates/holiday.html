@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Holiday</title>
+	<link rel="stylesheet" href="../static/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/styles.css">
+</head>
+<body class="noload" style="overflow: scroll;">
+    <h1>Choose a holiday</h1>
+	
+	<div class="page-content">
+	
+		<form class="row g-3" action="/holiday" method="POST">
+		
+		<div class="form-floating col-auto">
+			<select class="form-select" name="holiday" id="holidays">
+					{% for item in holidays %}
+					<option value="{{item}}">{{item}}</option>
+					{% endfor %}
+			</select>
+			<label for="holidays">Choose a holiday:</label>
+		</div>
+		<div class="col-auto" style="align-self: center;">
+			<input class="btn" type="submit" value="Choose">
+		</div>
+		</form>
+		
+		<br><br>
+		
+		<form class="row g-3" action="/update-holiday" method="POST" onsubmit="updateHolidayValidation(event)">
+			<div class="col-auto">
+				<input id='old_holiday' name='old_holiday' class="form-control" type="text" placeholder="Old holiday name" value="{{holiday}}" readonly>
+				<input id='updated_holiday' name='updated_holiday' class="form-control" type="text" placeholder="New holiday name" value="{{holiday}}" onchange="checkUpdateHoliday()">
+			</div>
+			<div class="col-auto" style="align-self:flex-end;">
+				<input class="btn" type="submit" id="update_holiday" value="update" disabled>
+			</div>
+			<div class="col-4" style="text-align:center;">
+				{% for item in holidayDate %}
+					<label name='chosenDate' for="holidays">Date:{{item[0]}}</label><br>
+				{% endfor %}
+			</div>
+		</form>
+		
+		<br><br>
+			
+		<h1 style="margin-bottom:10px;">Add a holiday</h1>
+		<div class="page-content">
+			<form class="row g-3" action="/add-holiday" method="POST" onsubmit="addHolidayValidation(event)">
+				<div class="col-auto">
+					<input id='new_holiday' name='new_holiday' class="form-control" type="text" placeholder="Add new holiday" onchange="checkAddHoliday()"/>
+					{% for item in date_limit %}
+						<input id='date' name='date' class="form-control" type="date" max="{{item[0]}}" min = "{{item[1]}}" placeholder="Select date" onchange="checkAddHoliday()"/>
+					{% endfor %}
+				</div>
+				<br>
+				<div class="col-auto" style="align-self:flex-end;">
+					<input class="btn" type="submit" id="add_holiday" disabled/>
+				</div>
+			</form>
+			{% block content %}
+			<script type="text/javascript">
+				function checkUpdateHoliday(){
+					const updateHolidayIsEmpty = document.getElementById("updated_holiday").value === "";
+					const oldHolidayIsEmpty = document.getElementById("old_holiday").value === ""
+					document.getElementById('update_holiday').disabled = updateHolidayIsEmpty || oldHolidayIsEmpty
+				}
+				function checkAddHoliday() {
+					const newHolidayIsEmpty = document.getElementById("new_holiday").value === "";
+					const dataIsEmpty = document.getElementById("date").value === ""
+					document.getElementById('add_holiday').disabled = newHolidayIsEmpty || dataIsEmpty;
+				}
+				function updateHolidayValidation(e){
+					const existingHolidayNames = {{holidays | safe}}
+					const inputName = document.getElementById("updated_holiday").value.toLowerCase();
+					if (existingHolidayNames.includes(inputName)){
+						alert(`Selected name "${inputName}" already exits.`);
+						e.preventDefault();
+						return false;
+					}
+				}
+				function addHolidayValidation(e) {
+					const existingHolidayNames = {{holidays | safe}}
+					const inputName = document.getElementById("new_holiday").value.toLowerCase();
+					const existingHolidays = {{existing_holidays | safe}}
+					const inputDate = document.getElementById("date").value;
+					if (existingHolidays.includes(inputDate + "/" + inputName)){
+						alert(`Holiday "${inputName}" has already been added on "${inputDate}"`);
+						e.preventDefault();
+						return false;
+					}
+					return true;
+				}
+			</script>
+			{% endblock %}
+		</div>
+	</div>
+	
+	<script src="../static/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+</body>
+</html>

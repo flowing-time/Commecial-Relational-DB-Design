@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Store Statistics</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="../static/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <h1 style="margin-bottom:20px;">Store Statistics</h1>
+	
+	{% for item in data %}
+	
+	<div class="container-fluid">
+		<div class="row g-2" style="text-align: end; width:98vw;">
+			<div class="col">
+				<div class="card text-white rounded-0">
+					<div class="card-body">
+						<i class="material-icons">store</i>
+						<h1 class="card-title">{{item[0] | format_number }}</h1>
+						<h5 class="card-text">Stores</h5>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card text-white rounded-0">
+					<div class="card-body">
+						<i class="material-icons">fastfood</i>
+						<h1 class="card-title">{{item[1] | format_number }}</h1>
+						<h5 class="card-text">w/ Food</h5>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card text-white rounded-0">
+					<div class="card-body">
+						<i class="material-icons">child_care</i>
+						<h1 class="card-title">{{item[2] | format_number }}</h1>
+						<h5 class="card-text">w/ Childcare</h5>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card text-white rounded-0">
+					<div class="card-body">
+						<i class="material-icons">inventory_2</i>
+						<h1 class="card-title">{{item[3] | format_number }}</h1>
+						<h5 class="card-text">Products</h5>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card text-white rounded-0">
+					<div class="card-body">
+						<i class="material-icons">campaign</i>
+						<h1 class="card-title">{{item[4] | format_number }}</h1>
+						<h5 class="card-text">Campaigns</h5>
+					</div> 
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+	<script src="../static/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+	
+	<script>
+	var colors = ["#1b76ff", "#009dff", "#00baff", "#00d0d8", "#00e1ab"]
+	var x = document.getElementsByClassName("row g-2")[0];
+	var y = x.getElementsByClassName("card text-white rounded-0");
+	var i;
+	for (i=0; i<y.length; i++) {
+		y[i].style.backgroundColor = colors[i];
+	}
+	</script>
+</body>
+</html>

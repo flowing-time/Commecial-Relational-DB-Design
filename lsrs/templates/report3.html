@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Report 3</title>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <h1>Choose a state</h1>
+	
+	<div class="page-content">
+		<form class="row g-2" action="/report3" method="POST">
+		
+		<div class="form-floating col-4">
+			<select class="form-select" name="state" id="states">
+					{% for item in states %}
+					{% if item[0] == s %} 
+						<option value={{item[0]}} selected>{{item[0]}}</option>
+					{% else %}
+						<option value={{item[0]}}>{{item[0]}}</option>
+					{% endif %}
+					{% endfor %}
+			</select>
+			<label for="states">Choose a state:</label>
+		</div>
+		<div class="col-auto" style="align-self: center;">
+			<input class="btn" type="submit" value="Choose">
+		</div>
+		</form>
+
+		<br>
+
+		<h1>Store Revenue by Year in state {{s}} </h1>
+		<table class="table">
+		<thead>
+			<tr>
+				<th>Store ID</th>
+				<th>Store address</th>
+				<th>City name</th>
+				<th>Sales year</th>
+				<th>Total revenue</th>
+			</tr>
+			</thead>
+			{% for item in data %}
+				<tr>
+					<td>{{item[0]}}</td>
+					<td>{{item[1]}}</td>
+					<td>{{item[2]}}</td>
+					<td>{{item[3]}}</td>
+					<td>{{item[4] | format_currency }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<script src="../static/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+</body>
+</html>

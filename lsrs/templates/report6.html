@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Revenue by Population</title>
+	<link rel="stylesheet" href="../static/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+	<h2>Revenue by Population</h2>
+	
+	<div class="page-content">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Revenue</th>
+					<th>Small</th>
+					<th>Medium</th>
+					<th>Large</th>
+					<th>Extra Large</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in data %}
+				<tr>
+					<th>{{item[0]}}</th>
+					<td>{{item[1] | format_currency }}</td>
+					<td>{{item[2] | format_currency }}</td>
+					<td>{{item[3] | format_currency }}</td>
+					<td>{{item[4] | format_currency }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<script src="../static/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+</body>
+</html>

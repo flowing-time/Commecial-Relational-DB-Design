@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Restaurant Impact on Category Sales</title>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+	<h2>Restaurant Impact on Category Sales</h2>
+	
+	<div class="page-content">
+		<table class="table">
+		<thead>
+		<tr>
+			<th>Category</th>
+			<th>Store Type</th>
+			<th>Quantity Sold</th>    
+		</tr>
+		</thead>
+		{% for item in data %}
+		<tr>
+			<td rowspan="2">{{item[0]}}</td>
+			<td>Non-restaurant</td> 
+			<td>{{item[1][1] | format_number }}</td>
+			<tr>
+			<td>Restaurant</td> 
+			<td>{{item[2][1] | format_number }}</td>
+			</tr> 
+		</tr>
+		{% endfor %} 
+		</table>
+	</div>
+<script src="../static/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+

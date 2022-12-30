@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Childcare Sales Volume</title>
+
+	<link rel="stylesheet" href="../static/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+  <h2>Childcare Sales Volume</h2>
+  
+  <div class="page-content">
+	  <table class="table">
+		  <thead>
+			<tr>
+			  <th>Total Sales</th>
+			  {% for childcare_limit in category %}
+				{% if childcare_limit == "No childcare" %}
+				<th>{{childcare_limit}}</th>
+				{% else %}
+				<th>{{childcare_limit}}min</th>
+				{% endif %}
+			  {% endfor %}
+			</tr>
+		  </thead>
+		  <tbody>
+			{% for item in data %}
+			<tr>
+				<th>{{item[0]}}</th>
+				{% for value in item %}
+				  {% if loop.index0 != 0 %}
+				  <td>{{value | format_currency }}</td>
+				  {% endif %}
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		  </tbody>
+		</table>
+	</div>
+	<script src="../static/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+</body>
+</html>
